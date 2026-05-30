@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '4.0.5'
+    id 'org.springframework.boot' version '4.0.6'
     id 'io.spring.dependency-management' version '1.1.7'
     id "com.diffplug.spotless" version "8.4.0"
     id 'jacoco'
@@ -12,7 +12,7 @@ description = 'learn-spring-ai'
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(25)
     }
 }
 
@@ -21,7 +21,7 @@ repositories {
 }
 
 ext {
-    set('springAiVersion', "2.0.0-M4")
+    set('springAiVersion', "2.0.0-M8")
 }
 
 dependencies {
@@ -54,6 +54,10 @@ tasks.named('jacocoTestReport') {
         html.required = true
         csv.required = false
     }
+}
+
+compileJava {
+    dependsOn(spotlessApply)
 }
 
 spotless {
