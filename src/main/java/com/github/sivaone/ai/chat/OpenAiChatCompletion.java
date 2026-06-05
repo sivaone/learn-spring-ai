@@ -1,11 +1,18 @@
 package com.github.sivaone.ai.chat;
 
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.stereotype.Service;
+
+@Service
 public class OpenAiChatCompletion {
 
-  public String complete(String prompt) {
-    String response = "";
-    // TODO: Call openai
+  private final ChatClient chatClient;
 
-    return response;
+  public OpenAiChatCompletion(ChatClient.Builder chatClientBuilder) {
+    this.chatClient = chatClientBuilder.build();
+  }
+
+  public String complete(String prompt) {
+    return chatClient.prompt().user(prompt).call().content();
   }
 }
