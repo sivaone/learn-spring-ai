@@ -1,0 +1,36 @@
+POST http://localhost:8080/api/chat
+Content-Type: application/json
+Accept: application/json
+
+{
+    "message": "Echo my name. My name is Buddha."
+}
+
+###
+POST http://localhost:8080/api/chat-template
+Content-Type: application/json
+Accept: application/json
+
+{
+  "message": "LLM"
+}
+
+###
+POST http://localhost:8080/api/documents
+Content-Type: application/json
+
+{
+  "text": "The Spring AI Structured Output Converters help to convert the LLM output into a structured format.",
+  "metadata": {
+    "platform": "Java",
+    "framework": "spring",
+    "version": "2.0"
+  }
+}
+
+###
+GET http://localhost:8080/api/documents/search?query=LLM
+
+
+###
+GET http://localhost:8080/api/rag/generate?prompt=transformers
