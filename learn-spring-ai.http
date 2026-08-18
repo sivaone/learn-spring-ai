@@ -3,7 +3,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "message": "Echo my name. My name is Buddha."
+    "message": "What is the current time?"
 }
 
 ###

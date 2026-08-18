@@ -1,47 +1,32 @@
 package com.github.sivaone.ai.mcp;
 
-import io.modelcontextprotocol.client.McpAsyncClient;
-import io.modelcontextprotocol.client.McpSyncClient;
 import io.modelcontextprotocol.spec.McpSchema;
-import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.mcp.annotation.McpLogging;
 import org.springframework.ai.mcp.annotation.McpToolListChanged;
 import org.springframework.ai.mcp.annotation.spring.ClientMcpSyncHandlersRegistry;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@Slf4j
 public class McpClientHandlers {
 
-    @Autowired
-    private ClientMcpSyncHandlersRegistry toolRegistry;
+    private final ClientMcpSyncHandlersRegistry toolRegistry;
 
-    /*@Autowired
-    private List<McpSyncClient> mcpSyncClients;
-    @Autowired
-    private List<McpAsyncClient> mcpAsyncClients;
-
-    @PostConstruct
-    public void listMcpServers() {
-        System.out.println("=== MCP Servers Configured ===");
-        mcpSyncClients.forEach(client -> {
-            System.out.println("Server: " + client.getServerInfo());
-            System.out.println("Client: " + client.getClientInfo());
-            System.out.println("------------------------------");
-        });
-    }*/
+    public McpClientHandlers(ClientMcpSyncHandlersRegistry toolRegistry) {
+        this.toolRegistry = toolRegistry;
+    }
 
     @McpLogging(clients = "everything")
     public void handleLoggingMessage(McpSchema.LoggingMessageNotification notification) {
-        System.out.println("Received log: " + notification.level() +
-                " - " + notification.data());
+        log.info("Received log: {} - {}", notification.level(), notification.data());
     }
 
     @McpToolListChanged(clients = "everything")
     public void handleToolListChanged(List<McpSchema.Tool> updatedTools) {
-        System.out.println("Tool list updated: " + updatedTools.size() + " tools available");
+        log.info("Tool list updated: {} tools available", updatedTools.size());
         // Update local tool registry
         toolRegistry.handleToolListChanged("everything", updatedTools);
     }
