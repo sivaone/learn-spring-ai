@@ -6,9 +6,8 @@ Use these instructions when suggesting or generating code for this repository.
 
 - This is a Gradle-based Java application named `learn-spring-ai`.
 - Use Java 21 language features only when they improve clarity and remain easy to read.
-- The project uses Spring Boot `4.0.5` and Spring AI `2.0.0-M4`.
+- The project uses Spring Boot `4.1.0` and Spring AI `2.0.0`.
 - Keep source code under the existing base package: `com.github.sivaone.ai`.
-- Follow the current formatting style enforced by Spotless with `googleJavaFormat()`.
 
 ## Code organization
 

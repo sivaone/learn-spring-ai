@@ -1,11 +1,15 @@
 package com.github.sivaone.ai.tools;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.stereotype.Component;
 
+@Slf4j
+@Component
 public class DateTimeTools {
 
     @Tool(description = "Get the current date and time in the user's timezone")
@@ -16,8 +20,8 @@ public class DateTimeTools {
     }
 
     @Tool(description = "Set a user alarm for the given time")
-    void setAlarm(@ToolParam(description = "Time in ISO-8601 format") String time) {
+    public void setAlarm(@ToolParam(description = "Time in ISO-8601 format") String time) {
         LocalDateTime alarmTime = LocalDateTime.parse(time, DateTimeFormatter.ISO_DATE_TIME);
-        System.out.println("Alarm set for " + alarmTime);
+        log.info("Alarm set for {}", alarmTime);
     }
 }

@@ -6,15 +6,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A Spring Boot application for learning [Spring AI](https://spring.io/projects/spring-ai#learn). It integrates with OpenAI via Spring AI abstractions and exposes REST endpoints.
 
-- **Spring Boot**: 4.0.6
-- **Spring AI**: 2.0.0-M8 (milestone)
+- **Spring Boot**: 4.1.0
+- **Spring AI**: 2.0.0
 - **Java**: 25
-- **Build**: Gradle with Spotless (Google Java Format) and JaCoCo
+- **Build**: Gradle with JaCoCo
 
 ## Commands
 
 ```bash
-# Build (also runs Spotless formatting)
+# Build
 ./gradlew build
 
 # Run tests (generates JaCoCo coverage report in build/reports/jacoco/)
@@ -23,17 +23,9 @@ A Spring Boot application for learning [Spring AI](https://spring.io/projects/sp
 # Run a single test class
 ./gradlew test --tests "com.github.sivaone.ai.LearnSpringAiApplicationTests"
 
-# Apply code formatting
-./gradlew spotlessApply
-
-# Check formatting without applying
-./gradlew spotlessCheck
-
 # Run the application
 ./gradlew bootRun
 ```
-
-Note: `compileJava` depends on `spotlessApply`, so formatting runs automatically on every build.
 
 ## Architecture
 
@@ -59,5 +51,3 @@ The `chat` subpackage is where AI interaction logic lives. `OpenAiChatCompletion
 - Thin controllers, business logic in services
 - Use Spring AI abstractions (`ChatClient`, `ChatModel`) over direct HTTP calls to OpenAI
 - Tests mock/stub model interactions — no calls to real external AI services
-- Avoid Lombok and new frameworks unless they provide clear value
-- Google Java Format is enforced by Spotless; run `./gradlew spotlessApply` before committing if the formatter hasn't run automatically

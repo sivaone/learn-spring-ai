@@ -1,5 +1,7 @@
 package com.github.sivaone.ai.rag;
 
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.SearchRequest;
@@ -10,9 +12,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class RagService {
 
     private final VectorStoreRetriever retriever;
+    // This is just for learning. In prod, use ChatClient.Builder to create a ChatClient instance.
     private final ChatModel chatModel;
 
     public RagService(VectorStoreRetriever retriever, ChatModel chatModel) {
@@ -37,7 +41,7 @@ public class RagService {
 
         // Generate response using the retrieved context
         String prompt = "Context information:\n" + context + "\n\nUser query: " + query;
-        System.out.println("Prompt: " + prompt);
+        log.info("Prompt: {}", prompt);
         return chatModel.call(prompt);
     }
 }
